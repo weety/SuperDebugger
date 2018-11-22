@@ -121,13 +121,13 @@ class SerialLib(object):
 
 class testSerialLib(object):
     def __init__(self):
-        self.serialport = SerialLib(Port="COM5", BaudRate="115200")
+        self.serialport = SerialLib(Port="COM6", BaudRate="57600")
         self.serialport.open()
         self.serialport.serial_device_monitor(self.myserial_device_monitor)
         self.serialport.data_received_func_register(self.myserial_data_received)
 
     def write(self, data):
-        self.serialport.write(data, False)
+        self.serialport.write(data)
 
     def myserial_device_monitor(self, is_exit):
         if is_exit is False:

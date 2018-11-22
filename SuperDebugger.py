@@ -40,6 +40,7 @@ class MainWindow(QMainWindow):
         
         self.pushButtonOpenSerial.clicked.connect(self.openSerial)
         self.pushButtonCloseSerial.clicked.connect(self.closeSerial)
+        self.pushButtonSend.clicked.connect(self.SerialSendMsg)
         
     
     def waveWidgetInit(self):
@@ -204,27 +205,36 @@ class MainWindow(QMainWindow):
         ByteSize = self.dataBits.currentText()
         Parity = self.parityCom.currentText()[0]
         Stopbits = self.stopBit.currentText()
+        print('Open serial:{}'.format((Port, BaudRate, ByteSize, Parity, Stopbits)))
         self.serialHandle = serlib.SerialLib(Port=Port, BaudRate=BaudRate, ByteSize=ByteSize, Parity=Parity, Stopbits=Stopbits)
         self.serialHandle.open()
         self.serialHandle.serial_device_monitor(self.serialMonitor)
         self.serialHandle.data_received_func_register(self.serialReceived)
+        self.pushButtonOpenSerial.setEnabled(False)
+        self.pushButtonCloseSerial.setEnabled(True)
     
     def closeSerial(self):
         self.serialHandle.close()
+        self.pushButtonOpenSerial.setEnabled(True)
+        self.pushButtonCloseSerial.setEnabled(False)
     
     def serialWrite(self, data):
-        self.serialport.write(data, False)
+        self.serialHandle.write(data)
 
     def serialMonitor(self, is_exit):
         if is_exit is False:
             print("serial device not found")
-            self.serialport.close()
+            self.serialHandle.close()
         else:
             print("closeed")
 
     def serialReceived(self, data):
-        #self.reciveData.
+        self.reciveData.append(data)
         print(data)
+    
+    def SerialSendMsg(self):
+        data = self.sendDataEdit.toPlainText()
+        self.serialWrite(data.encode('ascii'))
     
     def slotCancel(self):
         self.t.stop()
