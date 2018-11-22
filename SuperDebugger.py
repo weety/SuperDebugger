@@ -38,6 +38,9 @@ class MainWindow(QMainWindow):
         self.serial_listbox = list()
         self.detect_all_devices()
         
+        self.pushButtonOpenSerial.clicked.connect(self.openSerial)
+        self.pushButtonCloseSerial.clicked.connect(self.closeSerial)
+        
     
     def waveWidgetInit(self):
         self.pw = pg.PlotWidget(name='Plot1')  ## giving the plots names allows us to link their axes together
@@ -194,6 +197,34 @@ class MainWindow(QMainWindow):
                 self.serial_listbox = self.temp_serial
         except Exception as e:
             logging.error(e)
+    
+    def openSerial(self):
+        Port = self.portName.currentText()
+        BaudRate = self.baudRate.currentText()
+        ByteSize = self.dataBits.currentText()
+        Parity = self.parityCom.currentText()[0]
+        Stopbits = self.stopBit.currentText()
+        self.serialHandle = serlib.SerialLib(Port=Port, BaudRate=BaudRate, ByteSize=ByteSize, Parity=Parity, Stopbits=Stopbits)
+        self.serialHandle.open()
+        self.serialHandle.serial_device_monitor(self.serialMonitor)
+        self.serialHandle.data_received_func_register(self.serialReceived)
+    
+    def closeSerial(self):
+        self.serialHandle.close()
+    
+    def serialWrite(self, data):
+        self.serialport.write(data, False)
+
+    def serialMonitor(self, is_exit):
+        if is_exit is False:
+            print("serial device not found")
+            self.serialport.close()
+        else:
+            print("closeed")
+
+    def serialReceived(self, data):
+        #self.reciveData.
+        print(data)
     
     def slotCancel(self):
         self.t.stop()

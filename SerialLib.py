@@ -50,6 +50,7 @@ class SerialLib(object):
 
     def close(self):
         if self.serial:
+            self.is_opened = False
             self.serial.close()
 
     def write(self, data):

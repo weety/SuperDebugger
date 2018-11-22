@@ -358,17 +358,17 @@
                         <widget class="QComboBox" name="stopBit">
                          <item>
                           <property name="text">
-                           <string>1bit</string>
+                           <string>1</string>
                           </property>
                          </item>
                          <item>
                           <property name="text">
-                           <string>1.5bits</string>
+                           <string>1.5</string>
                           </property>
                          </item>
                          <item>
                           <property name="text">
-                           <string>2bits</string>
+                           <string>2</string>
                           </property>
                          </item>
                         </widget>
@@ -455,14 +455,14 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="openSerial">
+                    <widget class="QPushButton" name="pushButtonOpenSerial">
                      <property name="text">
                       <string>打开串口</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="closeSerial">
+                    <widget class="QPushButton" name="pushButtonCloseSerial">
                      <property name="enabled">
                       <bool>false</bool>
                      </property>
