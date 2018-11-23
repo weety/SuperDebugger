@@ -34,7 +34,11 @@
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QTextBrowser" name="reciveData"/>
+              <widget class="QTextBrowser" name="reciveData">
+               <property name="styleSheet">
+                <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+               </property>
+              </widget>
              </item>
              <item>
               <layout class="QVBoxLayout" name="verticalLayout_11">

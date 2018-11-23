@@ -44,6 +44,7 @@ class SerialLib(object):
             self.serial.open()
             if self.serial.isOpen():
                 self.is_opened = True
+                print('serial open success')
         except Exception as e:
             self.is_opened = False
             logging.error(e)
@@ -121,7 +122,7 @@ class SerialLib(object):
 
 class testSerialLib(object):
     def __init__(self):
-        self.serialport = SerialLib(Port="COM6", BaudRate="57600")
+        self.serialport = SerialLib(Port="COM5", BaudRate="115200")
         self.serialport.open()
         self.serialport.serial_device_monitor(self.myserial_device_monitor)
         self.serialport.data_received_func_register(self.myserial_data_received)
@@ -143,7 +144,7 @@ if __name__ == '__main__':
     serialport = testSerialLib()
 
     time.sleep(1)
-    serialport.write("Hello, just for test".encode('ascii'))
+    serialport.write("task\r\n".encode('ascii'))
     count = 0
     while count < 9:
         print("Count: %s"%count)
