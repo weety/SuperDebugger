@@ -36,7 +36,7 @@
              <item>
               <widget class="QTextBrowser" name="reciveData">
                <property name="styleSheet">
-                <string notr="true">font: 9pt &quot;微软雅黑&quot;;</string>
+                <string notr="true">font: 75 10pt &quot;Courier New&quot;;</string>
                </property>
               </widget>
              </item>
@@ -125,7 +125,11 @@
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_7">
                <item>
-                <widget class="QTextEdit" name="sendDataEdit"/>
+                <widget class="QTextEdit" name="sendDataEdit">
+                 <property name="styleSheet">
+                  <string notr="true">font: 75 10pt &quot;Courier New&quot;;</string>
+                 </property>
+                </widget>
                </item>
                <item>
                 <layout class="QVBoxLayout" name="verticalLayout_9">
