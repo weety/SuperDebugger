@@ -31,7 +31,7 @@ class SerialLib(object):
         self.is_opened = False
         self.is_exist = False
 
-    def open(self, timeout=2):
+    def open(self, timeout=0.1):
         self.serial = serial.Serial()
         self.serial.port = self.port
         self.serial.baudrate = self.baudrate

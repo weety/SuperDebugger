@@ -331,13 +331,15 @@ class SerialReceiveThread(QtCore.QThread):
 
     def run(self):
         print ("启动线程")
+        dealStr = ""
         while True:
             # 获得接收到的字符
-            count = self.Serial.inWaiting()
-            if count != 0:
-                dealStr = ""
+            #count = self.Serial.inWaiting()
+            if True: #count != 0:
                 # 读串口数据
-                recv = self.Serial.read(count)
+                recv = self.Serial.read(256)
+                if recv == b'':
+                    continue
                 # 在这里将接收到数据进行区分：hex 或 字符串
                 # hex 格式：\xYY\xYY\xYY，如果接收到的字符是这种格式，则说明是hex字符，我们需要将
                 # \x去除掉，取出YY，然后组成字符串返回
